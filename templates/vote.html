@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vote</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="container mt-5">
+    <h2 class="mb-4">Cast Your Vote</h2>
+    <form method="POST">
+        {% for party in parties %}
+            <div class="form-check">
+                <input type="radio" class="form-check-input" name="party" value="{{ party[0] }}" required>
+                <label class="form-check-label">{{ party[0] }}</label>
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-success mt-3">Submit Vote</button>
+    </form>
+</body>
+</html>

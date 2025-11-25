@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Secure Voter Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3a86ff;
+            --secondary: #8338ec;
+            --accent: #ff006e;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.9)), 
+                        url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--light);
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Background Options (uncomment to use) */
+        .bg-option-1 {
+            background: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.85)), 
+                        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') !important;
+        }
+        
+        .bg-option-2 {
+            background: linear-gradient(rgba(58, 134, 255, 0.85), rgba(131, 56, 236, 0.85)), 
+                        url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') !important;
+        }
+        
+        .bg-option-3 {
+            background: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.85)), 
+                        url('https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') !important;
+        }
+        
+        .registration-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 
+                        0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 900px;
+            animation: fadeInUp 0.8s ease-out;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .registration-header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .registration-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+            animation: shine 6s infinite linear;
+        }
+        
+        .registration-header h2 {
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .registration-header p {
+            opacity: 0.9;
+            font-weight: 300;
+            position: relative;
+        }
+        
+        .registration-form {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .form-control {
+            height: 55px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding-left: 50px;
+            transition: all 0.3s;
+            font-size: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .form-control:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255, 0, 110, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+        }
+        
+        textarea.form-control {
+            height: 120px;
+            padding-top: 15px;
+            resize: none;
+        }
+        
+        select.form-control {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 15px;
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 17px;
+            color: white;
+            font-size: 20px;
+            opacity: 0.8;
+        }
+        
+        .btn-register {
+            background: linear-gradient(45deg, var(--accent), #ff7d00);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-weight: 600;
+            border-radius: 12px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.4s;
+            box-shadow: 0 5px 20px rgba(255, 0, 110, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-register:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 0, 110, 0.6);
+        }
+        
+        .btn-register::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+            transition: all 0.7s ease;
+            opacity: 0;
+        }
+        
+        .btn-register:hover::after {
+            left: 100%;
+            opacity: 1;
+        }
+        
+        .file-upload {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .file-upload-btn {
+            border: 2px dashed rgba(255, 255, 255, 0.4);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .file-upload-btn:hover {
+            border-color: var(--accent);
+            background: rgba(255, 0, 110, 0.1);
+        }
+        
+        .file-upload-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .file-upload-icon {
+            font-size: 40px;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        
+        .file-upload-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 15px;
+        }
+        
+        .file-upload-text span {
+            color: white;
+            font-weight: 600;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -10px;
+            margin-left: -10px;
+        }
+        
+        .form-col {
+            padding-right: 10px;
+            padding-left: 10px;
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: linear-gradient(to right, var(--accent), #ff7d00);
+            width: 0;
+            transition: width 0.4s ease;
+            border-radius: 2px;
+            margin-top: 10px;
+        }
+        
+        .bg-selector {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .bg-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid white;
+            transition: transform 0.3s, box-shadow 0.3s;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .bg-option:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+        }
+        
+        .bg-option.active {
+            transform: scale(1.1);
+            box-shadow: 0 0 0 3px var(--accent);
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            filter: blur(30px);
+            animation: float 15s infinite linear;
+        }
+        
+        @media (max-width: 768px) {
+            .form-col {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+            
+            .registration-form {
+                padding: 20px;
+            }
+            
+            .registration-header {
+                padding: 20px;
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(30deg); }
+            100% { transform: translateX(100%) rotate(30deg); }
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, 50px) rotate(90deg); }
+            50% { transform: translate(0, 100px) rotate(180deg); }
+            75% { transform: translate(-50px, 50px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-option-1">
+    <div class="floating-shapes">
+        <div class="shape" style="width: 300px; height: 300px; top: 10%; left: 5%; animation-duration: 20s;"></div>
+        <div class="shape" style="width: 200px; height: 200px; top: 60%; left: 70%; animation-duration: 25s; animation-delay: 2s;"></div>
+        <div class="shape" style="width: 400px; height: 400px; top: 30%; left: 40%; animation-duration: 30s; animation-delay: 5s;"></div>
+    </div>
+    
+    <div class="registration-container">
+        <div class="registration-header">
+            <h2 class="animate__animated animate__fadeInDown">Voter Registration</h2>
+            <p class="animate__animated animate__fadeIn animate__delay-1s">Secure your democratic rights with our advanced system</p>
+        </div>
+        
+        <form method="POST" enctype="multipart/form-data" class="registration-form">
+            <div class="form-row">
+                <div class="form-col animate__animated animate__fadeInLeft">
+                    <div class="form-group">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" name="name" class="form-control" placeholder="Full Name" required>
+                    </div>
+                </div>
+                
+                <div class="form-col animate__animated animate__fadeInRight">
+                    <div class="form-group">
+                        <i class="fas fa-calendar-days input-icon"></i>
+                        <input type="number" name="age" class="form-control" placeholder="Age" required min="18" max="120">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-col animate__animated animate__fadeInLeft animate__delay-1s">
+                    <div class="form-group">
+                        <i class="fas fa-venus-mars input-icon"></i>
+                        <select name="gender" class="form-control" required>
+                            <option value="" disabled selected>Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                            <option value="Prefer not to say">Prefer not to say</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-col animate__animated animate__fadeInRight animate__delay-1s">
+                    <div class="form-group">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" name="email" class="form-control" placeholder="Email Address" required>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-col animate__animated animate__fadeInLeft animate__delay-2s">
+                    <div class="form-group">
+                        <i class="fas fa-id-card input-icon"></i>
+                        <input type="text" name="aadhaar" class="form-control" placeholder="Aadhaar Number" required>
+                    </div>
+                </div>
+                
+                <div class="form-col animate__animated animate__fadeInRight animate__delay-2s">
+                    <div class="form-group">
+                        <i class="fas fa-id-badge input-icon"></i>
+                        <input type="text" name="voter_id" class="form-control" placeholder="Voter ID" required>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="animate__animated animate__fadeIn animate__delay-3s">
+                <div class="form-group">
+                    <i class="fas fa-map-marker-alt input-icon"></i>
+                    <textarea name="address" class="form-control" placeholder="Full Address" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Upload Your Photo (For Face Verification)</label>
+                    <div class="file-upload">
+                        <div class="file-upload-btn">
+                            <div class="file-upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <div class="file-upload-text">
+                                <span>Click to upload</span> or drag and drop
+                                <br>JPG, PNG (Max 5MB)
+                            </div>
+                            <input type="file" name="image" class="file-upload-input" accept="image/*" required>
+                        </div>
+                        <div class="progress-bar" id="upload-progress"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group form-check animate__animated animate__fadeIn animate__delay-4s">
+                    <input type="checkbox" class="form-check-input" id="termsCheck" required>
+                    <label class="form-check-label" for="termsCheck">I agree to the <a href="#" style="color: var(--accent);">Terms & Conditions</a> and confirm my information is accurate</label>
+                </div>
+                
+                <button type="submit" class="btn btn-register animate__animated animate__fadeInUp animate__delay-5s">
+                    <i class="fas fa-user-shield mr-2"></i> Complete Secure Registration
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <div class="bg-selector">
+        <div class="bg-option active" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=60');" onclick="changeBackground(1)"></div>
+        <div class="bg-option" style="background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=60');" onclick="changeBackground(2)"></div>
+        <div class="bg-option" style="background-image: url('https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=60');" onclick="changeBackground(3)"></div>
+    </div>
+
+    <script>
+        // File upload progress indicator
+        const fileInput = document.querySelector('.file-upload-input');
+        const progressBar = document.getElementById('upload-progress');
+        
+        fileInput.addEventListener('change', function(e) {
+            if (this.files && this.files[0]) {
+                const file = this.files[0];
+                const fileName = file.name;
+                
+                // Simulate upload progress
+                let progress = 0;
+                const progressInterval = setInterval(() => {
+                    progress += 5;
+                    progressBar.style.width = progress + '%';
+                    
+                    if (progress >= 100) {
+                        clearInterval(progressInterval);
+                        document.querySelector('.file-upload-text').innerHTML = 
+                            `<i class="fas fa-check-circle" style="color: #4cc9f0; font-size: 40px; margin-bottom: 10px;"></i>
+                            <span>${fileName}</span> ready for verification`;
+                    }
+                }, 100);
+            }
+        });
+        
+        // Background selector functionality
+        function changeBackground(option) {
+            document.body.className = '';
+            document.body.classList.add('bg-option-' + option);
+            
+            document.querySelectorAll('.bg-option').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.querySelector(`.bg-selector div:nth-child(${option})`).classList.add('active');
+        }
+        
+        // Add animation class to elements when they come into view
+        const animateOnScroll = function() {
+            const elements = document.querySelectorAll('.animate__animated');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    const animationClass = element.classList[1];
+                    element.classList.add(animationClass);
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
